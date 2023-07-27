@@ -18,6 +18,7 @@ $(document).ready(function () {
     // disableSelectAll: false,
   });
   mySelectModels.disable();
+  $(".loader").hide();
 
   $(document).on("change", "#brand", function () {
     let brandId = $("#brand").find(":selected").val();
@@ -27,7 +28,7 @@ $(document).ready(function () {
       url: "api/brand/" + brandId + "/all_models",
       success: function (data) {
         var array = data.brandModels;
-        console.log(array);
+
         for (model of array) {
           var html = `<option value="${model.id}">${model.name}</option>`;
           $("#model").append(html);
@@ -45,11 +46,10 @@ $(document).ready(function () {
     });
   });
 
-  // add button
+  // add vehicle button
   $(document).on("click", "#add_vehicle_btn", function (e) {
     e.preventDefault();
-
-    let brandId = $("#brand").find(":selected").val();
+    alert("Are You Sure?");
     let selectedModel = $("#model").val();
     let price = $("#price").val();
     let year = $("#year").val();
@@ -60,15 +60,28 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "/add_vehicle",
+      url: "api/add_vehicle",
       data: {
-        brandId: brandId,
-        modelsIds: selectedModel,
+        model_id: selectedModel,
         price: price,
         year: year,
         mileage: mileage,
       },
-      success: function (data) {},
+      success: function (data) {
+        if (data.msg == "success") {
+          $(".loader").show();
+          setTimeout(function () {
+            $("#alert").removeClass("d-none");
+            $("#alert #alertMsg").text("Vehicle Added");
+            $(".loader").hide();
+            $("#add_vehicle_form")[0].reset();
+            mySelectModels.empty();
+            mySelectBrands.empty();
+            // mySelectModels.disable();
+          }, 1000);
+        }
+        $("#alert").delay(5000).fadeOut(800);
+      },
     });
   });
 });

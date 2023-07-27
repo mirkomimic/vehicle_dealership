@@ -16,6 +16,9 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="css/vanillaSelectBox.css">
+    @yield('styles') 
+
+    {{-- <link rel="stylesheet" href="css/loader.css"> --}}
     {{-- <link rel="stylesheet" href="css/filter_multi_select.css"> --}}
 </head>
 <body>

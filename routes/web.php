@@ -26,5 +26,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/search', [App\Http\Controllers\HomeController::class, 'search']);
 
     Route::get('/add_vehicle', [VehicleController::class, 'show']);
-    Route::post('/add_vehicle', [VehicleController::class, 'store']);
 });

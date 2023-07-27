@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('/brand/{id}', [BrandController::class, 'models']);
 Route::get('/brand/{id}/models', [BrandController::class, 'models']);
 Route::get('/brand/{id}/all_models', [BrandController::class, 'all_models']);
-// });
+Route::post('/add_vehicle', [VehicleController::class, 'store']);
