@@ -16,6 +16,8 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="stylesheet" href="css/vanillaSelectBox.css">
+    <link rel="stylesheet" href="css/product_card.css">
+    <link rel="stylesheet" href="css/style.css">
     @yield('styles') 
 
     {{-- <link rel="stylesheet" href="css/loader.css"> --}}

@@ -87,6 +87,12 @@ $(document).ready(function () {
       success: function (data) {
         $("#vehiclesTable").html("");
         $("#vehiclesTable").html(data);
+        $("html, body").animate(
+          {
+            scrollTop: $("#vehicles_section").offset().top,
+          },
+          500
+        );
       },
     });
   });

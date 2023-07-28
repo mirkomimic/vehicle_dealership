@@ -39,7 +39,7 @@
               </select>          
             </div>
             <div class="p-3">
-              <select id="model" form="add_vehicle_form">
+              <select id="model" form="add_vehicle_form" name="model">
               </select>          
             </div>
             <hr class="m-2">
@@ -58,7 +58,7 @@
               <input type="number" name="mileage" id="mileage" placeholder="Mileage" class="form-control w-50" form="add_vehicle_form">
             </div>
             <div class="p-3">
-              <input class="form-control w-50" type="file" name="vehicleImg" multiple>
+              <input class="form-control w-50" type="file" name="vehicleImg[]" form="add_vehicle_form" multiple>
             </div>
 
             <div class="p-3">

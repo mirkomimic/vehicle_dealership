@@ -23,7 +23,9 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+    // Route::get('/test', [App\Http\Controllers\HomeController::class, 'test']);
     Route::get('/search', [App\Http\Controllers\HomeController::class, 'search']);
 
-    Route::get('/add_vehicle', [VehicleController::class, 'show']);
+    Route::get('/add_vehicle', [VehicleController::class, 'create']);
+    Route::get('vehicle/{id}', [VehicleController::class, 'show']);
 });

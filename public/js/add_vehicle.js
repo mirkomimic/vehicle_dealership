@@ -47,13 +47,12 @@ $(document).ready(function () {
   });
 
   // add vehicle button
-  $(document).on("click", "#add_vehicle_btn", function (e) {
+  $(document).on("submit", "#add_vehicle_form", function (e) {
     e.preventDefault();
     alert("Are You Sure?");
+    var formData = new FormData(this);
     let selectedModel = $("#model").val();
-    let price = $("#price").val();
-    let year = $("#year").val();
-    let mileage = $("#mileage").val();
+
     if (selectedModel.length === 0) {
       return;
     }
@@ -61,12 +60,10 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "api/add_vehicle",
-      data: {
-        model_id: selectedModel,
-        price: price,
-        year: year,
-        mileage: mileage,
-      },
+      data: formData,
+      processData: false,
+      contentType: false,
+      cache: false,
       success: function (data) {
         if (data.msg == "success") {
           $(".loader").show();
