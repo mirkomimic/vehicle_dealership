@@ -38,7 +38,7 @@
                   <p>No Vehicles Found!</p>
                 @endforelse
                 
-                {!!  $vehicles->withQueryString()->links() !!}                      
+                {!!  $vehicles->withQueryString()->links('vendor.pagination.custom') !!}                      
   
               </div>
             </div>

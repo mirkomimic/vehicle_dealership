@@ -4,6 +4,7 @@
 
   @section('styles')
     <link rel="stylesheet" href="css/addVehicle.css">
+    <link rel="stylesheet" href="css/vanillaSelectBox.css">
   @endsection
 
   {{-- alert --}}
@@ -77,6 +78,8 @@
 
 @section('scripts')
   <script src="js/add_vehicle.js" type="text/javascript"></script>
+  {{-- <script src="../js/script.js" type="text/javascript"></script> --}}
+  <script src="js/vanillaSelectBox.js" type="text/javascript"></script>
 @endsection
 
 

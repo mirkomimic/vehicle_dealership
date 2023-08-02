@@ -15,9 +15,10 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <link rel="stylesheet" href="css/vanillaSelectBox.css">
-    <link rel="stylesheet" href="css/product_card.css">
-    <link rel="stylesheet" href="css/style.css">
+    {{-- <link rel="stylesheet" href="css/vanillaSelectBox.css"> --}}
+    {{-- <link rel="stylesheet" href="css/product_card.css"> --}}
+    {{-- <link rel="stylesheet" href="css/style.css"> --}}
+    {{-- <link rel="stylesheet" href="css/custom_pagination.css"> --}}
     @yield('styles') 
 
     {{-- <link rel="stylesheet" href="css/loader.css"> --}}
@@ -85,7 +86,7 @@
         {{-- @stack('scripts') --}}
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.js" ></script>
-    <script src="js/vanillaSelectBox.js" typse="text/javascript"></script>
+    {{-- <script src="js/vanillaSelectBox.js" typse="text/javascript"></script> --}}
     @yield('scripts') 
     {{-- <script src="js/vanillaSelectBox.js" typse="text/javascript"></script>
     <script src="js/script.js" type="text/javascript"></script> --}}

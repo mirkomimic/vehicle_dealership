@@ -28,4 +28,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(VehicleImg::class, 'vehicle_id', 'id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id')->orderBy('created_at', 'DESC');
+    }
 }

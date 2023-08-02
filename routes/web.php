@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,4 +29,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/add_vehicle', [VehicleController::class, 'create']);
     Route::get('vehicle/{id}', [VehicleController::class, 'show']);
+
+    Route::post('/comments/search', [CommentController::class, 'search']);
+    Route::post('vehicle/{vehicle}/comment', [CommentController::class, 'store']);
+    Route::post('/reply', [CommentController::class, 'reply']);
 });

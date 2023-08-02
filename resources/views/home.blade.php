@@ -2,6 +2,14 @@
 
 @section('content')
 
+@section('styles')
+<link rel="stylesheet" href="../css/vanillaSelectBox.css">
+<link rel="stylesheet" href="../css/product_card.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/custom_pagination.css">
+
+@endsection
+
 <div class="container">
     <div class="row justify-content-center mb-3">
       <div class="col-md-10">
@@ -50,6 +58,8 @@
 
 @section('scripts')
     <script src="js/script.js" type="text/javascript"></script>
+    <script src="js/vanillaSelectBox.js" typse="text/javascript"></script>
+
 @endsection
 
 @endsection
