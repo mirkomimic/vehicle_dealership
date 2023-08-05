@@ -25,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/brand/{id}/models', [BrandController::class, 'models']);
 Route::get('/brand/{id}/all_models', [BrandController::class, 'all_models']);
 Route::post('/add_vehicle', [VehicleController::class, 'store']);
+Route::get('/', [VehicleController::class, 'index']);

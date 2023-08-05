@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Filters\VehiclesFilter;
 use App\Models\Vehicle;
 use App\Models\VehicleImg;
 use Illuminate\Http\Request;
@@ -33,6 +34,15 @@ class VehicleController extends Controller
         });
         return response()->json([
             'msg' => 'success'
+        ]);
+    }
+
+    public function index(Request $request)
+    {
+        $vehicles = VehiclesFilter::filter($request)->paginate(6);
+
+        return response()->json([
+            'vehicles' => $vehicles
         ]);
     }
 }

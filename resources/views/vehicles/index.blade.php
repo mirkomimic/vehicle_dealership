@@ -6,6 +6,17 @@
 
       <div class="card" id="vehicles_section">
           <div class="card-header">{{ __('Vehicles') }}</div>
+          {{-- vehicles filter --}}
+            <div class="my-3 me-3">
+              <select name="vehicles_sort" id="vehicles_sort" class="d-block ms-auto ps-3" form="filter">
+                <option value="" selected disabled>Sort</option>
+                <option value="priceDesc">Price &darr;</option>
+                <option value="priceAsc">Price &uarr;</option>
+                <option value="createdDesc">Latest</option>
+                <option value="createdAsc">Oldest</option>
+              </select>
+            </div>
+          
             <div class="card-body">
               <!-- Vehicle Card -->
               <div class="row" id="ads">

@@ -51,25 +51,13 @@ $(document).ready(function () {
   // filter button
   $(document).on("click", "#filterBtn", function (e) {
     e.preventDefault();
+    getVehicles();
+  });
 
-    let brandId = $("#brand").find(":selected").val();
-    let selectedValues = $("#model").val();
-    if (selectedValues.length === 0) {
-      return;
-    }
-
-    $.ajax({
-      url: "/search",
-      data: {
-        modelsIds: selectedValues,
-      },
-      success: function (data) {
-        $("#vehiclesTable").html("");
-        $("#vehiclesTable").html(data);
-
-        mySelectBrands.setValue(brandId);
-      },
-    });
+  // sort vehicles
+  $(document).on("change", "#vehicles_sort", function (e) {
+    e.preventDefault();
+    getVehicles();
   });
 
   // pagination
@@ -87,15 +75,51 @@ $(document).ready(function () {
       success: function (data) {
         $("#vehiclesTable").html("");
         $("#vehiclesTable").html(data);
-        $("html, body").animate(
-          {
-            scrollTop: $("#vehicles_section").offset().top,
-          },
-          500
-        );
+        scrollToVehicles();
       },
     });
   });
+
+  function scrollToVehicles() {
+    $("html, body").animate(
+      {
+        scrollTop: $("#vehicles_section").offset().top,
+      },
+      500
+    );
+  }
+
+  function getVehicles() {
+    let brandId = $("#brand").find(":selected").val();
+    let selectedValues = $("#model").val();
+    let keyword = $("#keyword").val();
+    let priceMin = $("#priceMin").val();
+    let priceMax = $("#priceMax").val();
+    let yearMin = $("#yearMin").val();
+    let yearMax = $("#yearMax").val();
+    let sort = $("#vehicles_sort").find(":selected").val();
+
+    $.ajax({
+      url: "/search",
+      data: {
+        modelsIds: selectedValues,
+        keyword: keyword,
+        priceMin: priceMin,
+        priceMax: priceMax,
+        yearMin: yearMin,
+        yearMax: yearMax,
+        sort: sort,
+      },
+      success: function (data) {
+        $("#vehiclesTable").html("");
+        $("#vehiclesTable").html(data);
+
+        $("#vehicles_sort").val(sort);
+        scrollToVehicles();
+        mySelectBrands.setValue(brandId);
+      },
+    });
+  }
 
   // on change select for add_vehicle page
   // $(document).on("change", "#brand2", function () {
