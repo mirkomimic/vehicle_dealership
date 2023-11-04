@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Znck\Eloquent\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,6 +11,7 @@ class Vehicle extends Model
 {
     use HasFactory;
     use BelongsToThrough;
+    use Filterable;
 
     // https://github.com/staudenmeir/belongs-to-through
     public function brand()

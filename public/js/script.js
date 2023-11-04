@@ -18,6 +18,34 @@ $(document).ready(function () {
     // disableSelectAll: false,
   });
   mySelectModels.disable();
+  $(".loader").hide();
+
+  $(".demo").slick({
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    dots: true,
+    slidesToShow: 3,
+    centerMode: true,
+    centerPadding: "",
+    draggable: true,
+
+    // appendDots: $("#dots"),
+
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          arrows: false,
+
+          // centerMode: true,
+          // infinite: true,
+        },
+      },
+    ],
+  });
+
   // mySelectModels2.disable();
 
   // on change select
@@ -64,11 +92,14 @@ $(document).ready(function () {
   $(document).on("click", ".pagination a", function (e) {
     e.preventDefault();
 
-    let page = $(this).attr("href").split("page=")[1];
+    // let page = $(this).attr("href").split("page=")[1];
+    let pageHref = $(this).attr("href");
     let selectedValues = $("#model").val();
 
     $.ajax({
-      url: "/search?page=" + page,
+      // url: "/search?page=" + page,
+      type: "GET",
+      url: pageHref,
       data: {
         modelsIds: selectedValues,
       },
@@ -100,10 +131,12 @@ $(document).ready(function () {
     let sort = $("#vehicles_sort").find(":selected").val();
 
     $.ajax({
+      type: "GET",
       url: "/search",
+      // url: "/search",
       data: {
-        modelsIds: selectedValues,
         keyword: keyword,
+        modelsIds: selectedValues,
         priceMin: priceMin,
         priceMax: priceMax,
         yearMin: yearMin,
@@ -111,30 +144,55 @@ $(document).ready(function () {
         sort: sort,
       },
       success: function (data) {
-        $("#vehiclesTable").html("");
-        $("#vehiclesTable").html(data);
+        // let url = this.url;
+        // let newUrl = url.slice(1);
 
-        $("#vehicles_sort").val(sort);
-        scrollToVehicles();
-        mySelectBrands.setValue(brandId);
+        // window.history.replaceState(null, null, newUrl);
+
+        $(".loader").show();
+        setTimeout(function () {
+          // mySelectModels.disable();
+          $("#vehiclesTable").html("");
+          $("#vehiclesTable").html(data);
+
+          $("#vehicles_sort").val(sort);
+          scrollToVehicles();
+          mySelectBrands.setValue(brandId);
+          $(".loader").hide();
+        }, 1000);
       },
     });
   }
 
-  // on change select for add_vehicle page
-  // $(document).on("change", "#brand2", function () {
-  //   let brandId = $("#brand2").find(":selected").val();
-  //   $("#model2").html("");
-  //   $.ajax({
-  //     type: "GET",
-  //     url: "api/brand/" + brandId + "/models",
-  //     success: function (data) {
-  //       var array = data.brandModels;
-  //       for (model of array) {
-  //         var html = `<option value="${model.id}">${model.name}</option>`;
-  //         $("#model2").append(html);
-  //       }
-  //     },
-  //   });
-  // });
+  // autocomplete
+  $(document).on("keyup", "#keyword", function (e) {
+    e.preventDefault();
+    // keyword = $("#keyword").val();
+    $("#keyword").autocomplete({
+      source: function (request, response) {
+        $.ajax({
+          url: "/api/",
+          type: "GET",
+          dataType: "json",
+          data: {
+            keyword: request.term,
+          },
+          success: function (data) {
+            // console.log(data);
+            var resp = $.map(data.vehicles.data, function (obj) {
+              // return obj.modelName + obj.brandName;
+              // autocomplete(obj);
+              return obj.modelName;
+            });
+            response(resp);
+          },
+        });
+      },
+      select: function (event, ui) {
+        // console.log(ui.item.modelName);
+        $("#keyword").val(ui.item.modelName);
+        return true;
+      },
+    });
+  });
 });

@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="css/vanillaSelectBox.css">
   @endsection
 
-  {{-- alert --}}
   <div class="container">
-    <div class="loader position-absolute top-50 start-50"></div>
+    {{-- spinner --}}
+    <div class="loader position-fixed top-50 start-50"></div>
+    
+    {{-- alert --}}
     <div class="row justify-content-center position-absolute top-0 end-0 z-1" style="width: 400px; margin-top: 55px">
       <div id="alert" class="d-none">
         <div class="alert alert-success alert-dismissible fade show d-flex" role="alert">

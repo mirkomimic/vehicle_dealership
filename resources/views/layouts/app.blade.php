@@ -12,6 +12,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -86,6 +88,9 @@
         {{-- @stack('scripts') --}}
     </div>
     <script src="https://code.jquery.com/jquery-3.7.0.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
     {{-- <script src="js/vanillaSelectBox.js" typse="text/javascript"></script> --}}
     @yield('scripts') 
     {{-- <script src="js/vanillaSelectBox.js" typse="text/javascript"></script>

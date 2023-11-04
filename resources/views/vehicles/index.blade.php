@@ -27,9 +27,9 @@
                         <span class="card-notify-badge">{{ $vehicle->brandName }}</span>
                         <span class="card-notify-year">{{ $vehicle->year }}</span>
                         @if ($vehicle->image)
-                          <img class="img-fluid" src="{{ asset('storage/images/'. $vehicle->image) }}" alt="Alternate Text" />
+                          <img class="img-fluid w-100 object-fit-cover" style="height: 255px" src="{{ asset('storage/images/'. $vehicle->image) }}" alt="Alternate Text" />
                         @else
-                          <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" alt="Alternate Text" />
+                          <img class="img-fluid w-100 object-fit-cover" style="height: 255px" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" alt="Alternate Text" />
                         @endif
                       </div>
                       <div class="card-image-overlay m-auto mt-2">

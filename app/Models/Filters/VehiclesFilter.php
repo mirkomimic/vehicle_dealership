@@ -27,12 +27,35 @@ class VehiclesFilter
       ->join('vehicle_types', 'models.vehicle_type_id', '=', 'vehicle_types.id');
   }
 
+  public function filterByModel(Request $request)
+  {
+    $this->query->whereIn('models.id', $request->modelsIds);
+  }
+
   public function searchByKeyword(Request $request)
   {
-    return $this->query
-      ->where('models.name', 'LIKE', "%" . $request->keyword . "%")
-      ->orWhere('vehicle_types.name', 'LIKE', "%" . $request->keyword . "%")
-      ->orWhere('brands.name', 'LIKE', "%" . $request->keyword . "%");
+    $this->query
+      ->where(function ($q) use ($request) {
+        $q->where('models.name', 'LIKE', "%" . $request->keyword . "%");
+        $q->orWhere('vehicle_types.name', 'LIKE', "%" . $request->keyword . "%");
+        $q->orWhere('brands.name', 'LIKE', "%" . $request->keyword . "%");
+      });
+    // ->where('models.name', 'LIKE', "%" . $request->keyword . "%")
+    // ->orWhere('vehicle_types.name', 'LIKE', "%" . $request->keyword . "%")
+    // ->orWhere('brands.name', 'LIKE', "%" . $request->keyword . "%");
+  }
+
+
+  public function minMaxPrice(Request $request)
+  {
+    $this->query->where('vehicles.price', '>=', $request->priceMin ?? 0);
+    $this->query->where('vehicles.price', '<=', $request->priceMax ?? 9999999);
+  }
+
+  public function minMaxYear(Request $request)
+  {
+    $this->query->where('vehicles.year', '>=', $request->yearMin ?? 0);
+    $this->query->where('vehicles.year', '<=', $request->yearMax ?? 3000);
   }
 
   // sort = priceAsc
@@ -56,23 +79,6 @@ class VehiclesFilter
     }
 
     // return $this->query;
-  }
-
-  public function minMaxPrice(Request $request)
-  {
-    $this->query->where('vehicles.price', '>=', $request->priceMin ?? 0);
-    $this->query->where('vehicles.price', '<=', $request->priceMax ?? 9999999);
-  }
-
-  public function minMaxYear(Request $request)
-  {
-    $this->query->where('vehicles.year', '>=', $request->yearMin ?? 0);
-    $this->query->where('vehicles.year', '<=', $request->yearMax ?? 3000);
-  }
-
-  public function filterByModel(Request $request)
-  {
-    $this->query->whereIn('models.id', $request->modelsIds);
   }
 
   public function filtering(Request $request)

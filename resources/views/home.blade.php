@@ -3,12 +3,26 @@
 @section('content')
 
 @section('styles')
+@parent
 <link rel="stylesheet" href="../css/vanillaSelectBox.css">
 <link rel="stylesheet" href="../css/product_card.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/custom_pagination.css">
+<link rel="stylesheet" href="../css/addVehicle.css">
+<link rel="stylesheet" href="../css/promoCard.css">
+<link rel="stylesheet" href="slick/slick.css">
+<link rel="stylesheet" href="slick/slick-theme.css">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" /> --}}
+<style>
+  .promoImg {
+    height: 200px;
+    width: 100%;
+  }
+</style>
 
 @endsection
+
+<div class="loader position-fixed top-50 start-50"></div>
 
 <div class="container">
   <div class="row justify-content-center mb-3">
@@ -59,7 +73,7 @@
           <div class="ps-3">
             <div class="col-md-6">
               <p>
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-outline-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                   More Filter Options
                 </button>
               </p>
@@ -84,12 +98,52 @@
 </div>
 
 <div id="vehiclesTable">
-    @include('vehicles.index')
+    {{-- @include('vehicles.index') --}}
+
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+    
+          <div class="card mb-5" id="vehicles_section">
+            <div class="card-header">{{ __('Latest Vehicles') }}</div>
+            <div class="slider demo p-3">
+              @foreach ($vehicles as $vehicle)
+                @if ($vehicle->image)
+                <figure class="snip1577 ">
+                  <img class="object-fit-cover promoImg" src="{{ asset('storage/images/'.$vehicle->image) }}" alt="sample99" />
+                  <figcaption>
+                    <h3>{{ $vehicle->modelName }}</h3>
+                    <h4>{{ number_format($vehicle->price, '2', ',', '.') }}</h4>
+                    <h4>{{ $vehicle->created_at->diffForHumans(); }}</h4>
+                  </figcaption>
+                  <a href="#"></a>
+                </figure>
+                @else
+                  <figure class="snip1577 ">
+                    <img class="object-fit-cover promoImg" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" alt="sample99" />
+                    <figcaption>
+                      <h3>{{ $vehicle->modelName }}</h3>
+                      <h4>{{ number_format($vehicle->price, '2', ',', '.') }}</h4>
+                      <h4>{{ $vehicle->created_at->diffForHumans(); }}</h4>
+                    </figcaption>
+                    <a href="#"></a>
+                  </figure>
+                @endif
+              @endforeach
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>    
 </div>
 
 @section('scripts')
+@parent
   <script src="js/script.js" type="text/javascript"></script>
   <script src="js/vanillaSelectBox.js" typse="text/javascript"></script>
+  <script src="slick/slick.js" typse="text/javascript"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> --}}
 
 @endsection
 

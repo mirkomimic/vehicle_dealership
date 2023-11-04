@@ -32,8 +32,10 @@ $(document).on("click", ".replyBtn", function (e) {
   }
 
   $(".replyBtn").not(this).toggle("d-none");
+  // $(".replyBtn").not(this).slideToggle();
   $(".replyDiv").insertAfter($(this).siblings(".collapseCommentBtn").first());
   $(".replyDiv").toggle("d-none");
+  // $(".replyDiv").slideToggle("d-none");
 });
 
 $.ajaxSetup({
@@ -121,6 +123,13 @@ $(document).on("click", ".collapseCommentBtn", function (e) {
   let parent = $(this).parent().parent();
   if (parent.children(".commentWithReplies").length > 0) {
     // console.log("ovde");
-    parent.children(".commentWithReplies").toggle("d-none");
+    // parent.children(".commentWithReplies").toggle("d-none");
+    parent.children(".commentWithReplies").slideToggle(1);
+
+    if ($(this).text() == "Collapse") {
+      $(this).text("Expand");
+    } else {
+      $(this).text("Collapse");
+    }
   }
 });
